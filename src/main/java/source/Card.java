@@ -4,7 +4,7 @@ import source.Suit;
 import java.lang.Comparable;
 
 
-public class Card implements Comparable{
+public class Card implements Comparable {
     private Suit suit;
     private char rate;
     private int score;
@@ -17,21 +17,8 @@ public class Card implements Comparable{
     }
     public void setScore(int i) {
     	this.score = i;
-  /*          if ((i>=2)&&(i<=10)) {
-                    score=i;
-            }
-            else {
-                    if (i<14) {
-                            score=10;
-                    }
-                    else {
-                            score=11;
-                    }
-            }
-            if (i<2) {
-                    score=1;
-            } */
     }
+    
     public void setRate(int i){
             if ((i>=2)&&(i<=9)) {
                     i+=48;
