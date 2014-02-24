@@ -4,7 +4,7 @@ import source.Suit;
 import java.lang.Comparable;
 
 
-public class Card implements Comparable {
+public class Card implements Comparable<Card> {
     private Suit suit;
     private char rate;
     private int score;
@@ -63,10 +63,9 @@ public class Card implements Comparable {
     }
 
     @Override
-    public int compareTo(Object obj) {
-    	Card card = (Card) obj;
-    	if (score == card.getScore()) return 0;
-    	if (score > card.getScore()) return -1; 
+    public int compareTo(Card obj) {
+    	if (score == obj.getScore()) return 0;
+    	if (score > obj.getScore()) return -1; 
     			else
     				return 1;
     }

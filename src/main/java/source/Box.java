@@ -1,27 +1,21 @@
 package source;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public abstract class Box {
 	
-	private List<Card> hand = new ArrayList<Card>();
+	private Hand hand = new Hand();
 	private int power;
 	private int combinationHash;
 	
-	public List<Card> getHand() {
+	public Hand getHand() {
 		return hand;
 	}
 	
 	public void sort() {
-		Collections.sort(hand);
+		hand.sort();
 	}
 	
-	public int getHandPower() {
-		Collections.sort(hand);
-		return 0;
-	}
+
 	
 	public void setHand(Card card) {
 		this.hand.add(card);
