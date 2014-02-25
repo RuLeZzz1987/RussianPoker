@@ -29,10 +29,11 @@ public class CardTest {
 		List<PlayerBox> boxList = table.getBoxes();
 		for (PlayerBox b: boxList) {
 			b.sort();
-			System.out.println(b.toString());
+			b.getHand().getCombinationOnFiveCards();
+			System.out.println(b.toString() +" "+b.getHand().getCombinationOnFiveCards());
 		}
 		table.sort();
-		System.out.println(table.getHand().toString());
+		System.out.println(table.getHand().toString() + " " + table.getHand().getCombinationOnFiveCards());
 	}
 
 }

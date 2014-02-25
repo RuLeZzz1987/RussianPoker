@@ -15,7 +15,16 @@ public class Hand {
 		Collections.sort(hand);
 	}
 	
-	public String getCombination() {
+	protected Boolean flushCheckOnFiveCards(){
+		for (int i=1; i<5; i++) {
+			if ( hand.get(0).getSuit() != hand.get(i).getSuit() ) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public String getCombinationOnFiveCards() {
 		int combPos = 0;
 		int consil = 0;
 		int combPos1 = 0;
@@ -36,18 +45,84 @@ public class Hand {
 		}
 		switch ( consil ) {
 			case 0: {
-				if ( hand.get(1).getScore() == 11 && hand.get(0).getScore() - hand.get(4).getScore() != 9 ) {
-					return "1"+hand.get(2).getScore() + hand.get(3).getScore() + hand.get(4).getScore();
-				} else return "0";
+				if ( !flushCheckOnFiveCards() ) {
+					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != 4 ) {
+						return "1"+hand.get(2).getScore() + hand.get(3).getScore() + hand.get(4).getScore();
+					}
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 ) {
+						return "5" + hand.get(0).getScore();
+					}
+					if ( hand.get(0).getScore() - hand.get(1).getScore() == 9 ) {
+						return "5" + hand.get(1).getScore();
+					}
+				} else {
+					if ( hand.get(0).getScore() - hand.get(4).getScore() != 4 || hand.get(0).getScore() - hand.get(1).getScore() != 9 ) {
+						return "6" + hand.get(0).getScore() + hand.get(1).getScore() + hand.get(2).getScore() + hand.get(3).getScore() + hand.get(4).getScore();
+					}
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 ) {
+						return "9" + hand.get(0).getScore();
+					}
+					if ( hand.get(0).getScore() - hand.get(1).getScore() == 9 ) {
+						return "9" + hand.get(1).getScore();
+					}
+					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == 4) {
+						return "10";
+					}
+				}
 			}
 			case 1: { 
-				if (consil1 == 0) {
-					return "2" + hand.get(combPos).getScore();
+				if ( consil1 == 0 ) {
+					String result = "2" + hand.get(combPos).getScore();
+					for (int i=0; i<5; i++) {
+						if ( hand.get(combPos).getScore() != hand.get(i).getScore() ) {
+							result = result + hand.get(i).getScore();
+						}
+					}
+					return result;
 				}
-				
-			
+				if ( consil1 == 1 ) {
+					String result = "3" + hand.get(combPos1).getScore() + hand.get(combPos).getScore();
+					for (int i=0; i<5; i++) {
+						if ( hand.get(combPos).getScore() != hand.get(i).getScore() || hand.get(combPos1).getScore() != hand.get(i).getScore() ) {
+							result = result + hand.get(i).getScore();
+						}
+					}
+					return result;
+				}
+				if ( consil1 == 2 ) {
+					return "7" + hand.get(combPos1).getScore() + hand.get(combPos).getScore();
+				}
+			}
+			case 2: {
+				if ( consil1 == 0 ) {
+					String result = "4" + hand.get(combPos).getScore();
+					for (int i=0; i<5; i++) {
+						if ( hand.get(combPos).getScore() != hand.get(i).getScore() ) {
+							result = result + hand.get(i).getScore();
+						}
+					}
+					return result;
+				} else {
+					return "7" + hand.get(combPos1).getScore() + hand.get(combPos).getScore();
+				}
+			}
+			case 3: {
+				String result = "8" + hand.get(combPos).getScore();
+				for (int i=0; i<5; i++) {
+					if ( hand.get(combPos).getScore() != hand.get(i).getScore() ) {
+						result = result + hand.get(i).getScore();
+					}
+				}
+				return result;
+			}
+			default : {
+				return null;
 			}
 		}
-		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return hand.toString();
 	}
 }
