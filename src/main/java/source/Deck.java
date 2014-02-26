@@ -19,10 +19,7 @@ public class Deck {
 
                     for (Suit suit: Suit.values()){
                             for (int j=2; j<15; j++) {
-                                    Card card= new Card();
-                                    card.setRate(j);
-                                    card.setSuit(suit);
-                                    card.setScore(j);
+                                    Card card= new Card(suit,j,j);
                                     deck.add(card);
                             }
 

@@ -5,5 +5,4 @@
 .gitignore
 .gradle/
 .project
-.settings/
-/src
+.settings
