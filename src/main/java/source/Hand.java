@@ -26,53 +26,60 @@ public class Hand {
 	
 	public Combination getCombinationOnFiveCards() {
 		if ( hand.size() != 5 ) {
-			throw new RuntimeException("Cards count in hand != 5");
+			throw new IllegalStateException("Cards count in hand != 5");
 		}
-		int combPos = 0;
-		int consil = 0;
-		int combPos1 = 0;
-		int consil1 = 0;
-		Boolean fl = true;
+		int pairPosition = 0;
+		int consilience = 0;
+		int firstPairPosition = 0;
+		int consilience1 = 0;
+		int flagFirstPairFound = 0;
 		for (int i=1; i<5; i++) {
-			if ( hand.get(combPos).getScore() == hand.get(i).getScore() ) {
-				if ( fl ) { 
-					consil++;
+			if ( hand.get(pairPosition).getScore() == hand.get(i).getScore() ) {
+				if ( flagFirstPairFound <= 1) {
+					consilience++;
+				}
+			} else {
+				if ( consilience == 0 ) {
+					pairPosition = i;
 				} else {
-					combPos1 = combPos;
-					consil1 = consil;
-					consil = 0;
-					combPos = i;
-				}				
-			} else { 
-				if ( consil == 0 ) {
-					combPos = i;
-				} else {
-					fl = false;
+					if ( flagFirstPairFound == 0 ) {
+						firstPairPosition = pairPosition;
+						pairPosition = i;
+						consilience1 = consilience;
+						consilience = 0;
+						flagFirstPairFound = 1;
+					}
 				}
 			}
 		}
-		switch ( consil ) {
+		if ( consilience == 0 && consilience1 != 0) {
+			consilience = consilience1;
+			consilience1 = 0;
+			pairPosition = firstPairPosition;
+			firstPairPosition = 0;
+		}
+		switch ( consilience ) {
 			case 0: {
 				if ( !isFlushOnFiveCards() ) {
 					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() != 4 ) {
-						return new Combination("1"+hand.get(2).getScore() + hand.get(3).getScore() + hand.get(4).getScore());
+						return new Combination("1" + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore());
 					}
 					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 ) {
-						return new Combination("5" + hand.get(0).getScore());
+						return new Combination("5" + " " + hand.get(0).getScore());
 					}
 					if ( hand.get(0).getScore() - hand.get(1).getScore() == 9 ) {
-						return new Combination("5" + hand.get(1).getScore());
+						return new Combination("5" + " " + hand.get(1).getScore());
 					}
 					return new Combination("0");
 				} else {
-					if ( hand.get(0).getScore() - hand.get(4).getScore() != 4 || hand.get(0).getScore() - hand.get(1).getScore() != 9 ) {
-						return new Combination("6" + hand.get(0).getScore() + hand.get(1).getScore() + hand.get(2).getScore() + hand.get(3).getScore() + hand.get(4).getScore());
+					if ( hand.get(0).getScore() - hand.get(4).getScore() != 4 && hand.get(0).getScore() - hand.get(1).getScore() != 9 ) {
+						return new Combination("6" + " " + hand.get(0).getScore() + " " + hand.get(1).getScore() + " " + hand.get(2).getScore() + " " + hand.get(3).getScore() + " " + hand.get(4).getScore());
 					}
-					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 ) {
-						return new Combination("9" + hand.get(0).getScore());
+					if ( hand.get(0).getScore() - hand.get(4).getScore() == 4 && hand.get(0).getScore() != 14) {
+						return new Combination("9" + " " + hand.get(0).getScore());
 					}
 					if ( hand.get(0).getScore() - hand.get(1).getScore() == 9 ) {
-						return new Combination("9" + hand.get(1).getScore());
+						return new Combination("9" + " " + hand.get(1).getScore());
 					}
 					if ( hand.get(1).getScore() == 13 && hand.get(0).getScore() - hand.get(4).getScore() == 4) {
 						return new Combination("10");
@@ -80,52 +87,52 @@ public class Hand {
 				}
 			}
 			case 1: { 
-				if ( consil1 == 0 ) {
-					String result = "2" + hand.get(combPos).getScore();
+				if ( consilience1 == 0 ) {
+					String result = "2" + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore();
 					for (int i=0; i<5; i++) {
-						if ( hand.get(combPos).getScore() != hand.get(i).getScore() ) {
-							result = result + hand.get(i).getScore();
+						if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
+							result = result + " " + hand.get(i).getScore();
 						}
 					}
 					return new Combination(result);
 				}
-				if ( consil1 == 1 ) {
-					String result = "3" + hand.get(combPos1).getScore() + hand.get(combPos).getScore();
+				if ( consilience1 == 1 ) {
+					String result = "3" + " " + hand.get(firstPairPosition).getScore() + " " + hand.get(firstPairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore();
 					for (int i=0; i<5; i++) {
-						if ( hand.get(combPos).getScore() != hand.get(i).getScore() || hand.get(combPos1).getScore() != hand.get(i).getScore() ) {
-							result = result + hand.get(i).getScore();
+						if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() && hand.get(firstPairPosition).getScore() != hand.get(i).getScore() ) {
+							result = result + " " + hand.get(i).getScore();
 						}
 					}
 					return new Combination(result);
 				}
-				if ( consil1 == 2 ) {
-					return new Combination("7" + hand.get(combPos1).getScore() + hand.get(combPos).getScore());
+				if ( consilience1 == 2 ) {
+					return new Combination("7" + " " + hand.get(firstPairPosition).getScore() + " " + hand.get(pairPosition).getScore()) ;
 				}
 			}
 			case 2: {
-				if ( consil1 == 0 ) {
-					String result = "4" + hand.get(combPos).getScore();
+				if ( consilience1 == 0 ) {
+					String result = "4" + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore() + " " + hand.get(pairPosition).getScore();
 					for (int i=0; i<5; i++) {
-						if ( hand.get(combPos).getScore() != hand.get(i).getScore() ) {
-							result = result + hand.get(i).getScore();
+						if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
+							result = result + " " + hand.get(i).getScore();
 						}
 					}
 					return new Combination(result);
 				} else {
-					return new Combination("7" + hand.get(combPos1).getScore() + hand.get(combPos).getScore());
+					return new Combination("7" + " " + hand.get(pairPosition).getScore() + " " + hand.get(firstPairPosition).getScore() );
 				}
 			}
 			case 3: {
-				String result = "8" + hand.get(combPos).getScore();
+				String result = "8" + " " + hand.get(pairPosition).getScore();
 				for (int i=0; i<5; i++) {
-					if ( hand.get(combPos).getScore() != hand.get(i).getScore() ) {
-						result = result + hand.get(i).getScore();
+					if ( hand.get(pairPosition).getScore() != hand.get(i).getScore() ) {
+						result = result + " " + hand.get(i).getScore();
 					}
 				}
 				return new Combination(result);
 			}
 			default : {
-				return null;
+				 throw new IllegalStateException("Unknown combination");
 			}
 		}
 	}

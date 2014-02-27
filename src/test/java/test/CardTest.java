@@ -4,13 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import source.Card;
 import source.Deck;
-import source.Hand;
 import source.PlayerBox;
 import source.Suit;
 import source.Table;
@@ -27,6 +24,23 @@ public class CardTest {
 	}
 	
 	@Test
+	public void testCreateCard() {
+		Card card1 = new Card(Suit.CLUBS, 'A');
+		assertEquals(14, card1.getScore());
+		card1 = new Card(Suit.CLUBS, 'K');
+		assertEquals(13, card1.getScore());
+		card1 = new Card(Suit.CLUBS, 'Q'); 
+		assertEquals(12, card1.getScore());
+		card1 = new Card(Suit.CLUBS, 'J');
+		assertEquals(11, card1.getScore());
+		card1 = new Card(Suit.CLUBS, 'T');
+		assertEquals(10, card1.getScore());
+		for (int i=2; i<=9; i++) {
+			card1 = new Card(Suit.CLUBS, (char)(i+48));
+			assertEquals(i, card1.getScore()); 
+		}
+	}
+	@Test
 	public void testShowDeal() {
 		Table table = new Table();
 		table.deal(2);
@@ -40,15 +54,6 @@ public class CardTest {
 		System.out.println(table.getHand().toString() + " " + table.getHand().getCombinationOnFiveCards());
 	}
 	
-	@Test
-	public void testIsFlush() {
-		Hand hand = new Hand();
-		hand.add(new Card(Suit.CLUBS, 'A', 14));
-		hand.add(new Card(Suit.CLUBS, 'K', 13));
-		hand.add(new Card(Suit.CLUBS, '6', 6));
-		hand.add(new Card(Suit.CLUBS, '3', 3));
-		hand.add(new Card(Suit.CLUBS, '2', 2));
-		Assert.assertEquals("61413632", hand.getCombinationOnFiveCards().getCombCode());
-	}
+
 
 }

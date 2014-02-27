@@ -46,7 +46,7 @@ public class Card implements Comparable<Card> {
     			break;
     		}
     		default : {
-    			this.score = (int) rate;
+    			this.score = (int) rate - 48;
     		}
     	}
     }

@@ -8,19 +8,26 @@ public class Combination {
 	
 	public Combination(String code) {
 		this.code = code;
-		getName(code);
-		getKickersList(code);
+		setName(code);
+		setKickersList(code);
 	}
 
 	public String getCombCode() {
 		return code;
 	}
 	
-	private void getKickersList(String code) {
+	private void setKickersList(String code) {
+		String bufstr = code.substring(code.indexOf(" ")+1);
+		System.out.println(code);
 		
 	}
 	
-	private void getName(String code) {
+    @Override
+    public String toString() {
+      return name;
+    }
+	
+	private void setName(String code) {
 		switch (code.charAt(0)) {
 			case '0' : {
 				this.name = "Don't qualify";
@@ -63,7 +70,7 @@ public class Combination {
 				break;
 			}
 			case '9' : {
-				this.name = "Straigh flush";
+				this.name = "Straight flush";
 				break;
 			}
 		}
