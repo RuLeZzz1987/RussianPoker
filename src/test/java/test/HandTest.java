@@ -29,7 +29,10 @@ public class HandTest {
 		hand.add(new Card(Suit.CLUBS, '6', 6));
 		hand.add(new Card(Suit.CLUBS, '3', 3));
 		hand.add(new Card(Suit.CLUBS, '2', 2));
-		hand.getCombinationOnFiveCards();
+		int[] check = { 2, 14, 14, 6, 3, 2 };
+		for ( int i=0; i < hand.getCombinationOnFiveCards().getKickers().length; i++) {
+			assertEquals(check[i], hand.getCombinationOnFiveCards().getKickers()[i]);
+		}
 	}
 	
 
@@ -263,4 +266,6 @@ public class HandTest {
 		hand.add(new Card(Suit.CLUBS, 'T'));
 		assertEquals("10", hand.getCombinationOnFiveCards().getCombCode());
 	}
+	
+
 }

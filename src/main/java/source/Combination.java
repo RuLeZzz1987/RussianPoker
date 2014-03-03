@@ -1,10 +1,10 @@
 package source;
 
-public class Combination {
+public class Combination implements Comparable<Combination> {
 	
 	private String code;
 	private String name;
-	private int[] kickers = new int[5]; 
+	private int[] kickers = new int[6]; 
 	
 	public Combination(String code) {
 		this.code = code;
@@ -17,10 +17,21 @@ public class Combination {
 	}
 	
 	private void setKickersList(String code) {
-		String bufstr = code.substring(code.indexOf(" ")+1);
-		System.out.println(code);
+		int i = 0;
+		code = code + "  ";
+		while ( code.compareTo(" ") != 0 ) {
+			String bufstr = code.substring(0, code.indexOf(" "));
+			kickers[i] = Integer.parseInt(bufstr);
+			code = code.substring(code.indexOf(" ")+1);
+			i++;
+		}
 		
 	}
+	
+	public int[] getKickers() {
+		return  kickers;
+	}
+	
 	
     @Override
     public String toString() {
@@ -74,5 +85,19 @@ public class Combination {
 				break;
 			}
 		}
+	}
+
+	
+	@Override
+	public int compareTo(Combination comb) {
+		for (int i = 0; i < kickers.length; i++) {
+			if ( comb.getKickers()[i] > kickers[i] ) { 
+				return -1;
+			}
+			if ( comb.getKickers()[i] < kickers[i] ) { 
+				return 1;
+			}
+		}
+		return 0;
 	}
 }
