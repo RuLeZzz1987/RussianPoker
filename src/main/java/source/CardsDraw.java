@@ -1,8 +1,9 @@
 package source;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class CardsDraw {
+public class CardsDraw{
 	
 	private ArrayList<Card> knownCards;
 	private Hand hand;
@@ -18,5 +19,20 @@ public class CardsDraw {
 	
 	public ArrayList<Card> getDrawList(){
 		return cardsForChange;
+	}
+	
+	public void sort() {
+		Collections.sort(this.cardsForChange);
+	}
+
+	public Boolean isSameSet(CardsDraw draw){
+		draw.sort();
+		sort();
+		for (int i=0; i<cardsForChange.size(); i++) {
+			if ( draw.getDrawList().get(i) != this.cardsForChange.get(i)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
