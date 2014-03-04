@@ -11,6 +11,10 @@ public class Hand {
 		hand.add(card);
 	}
 	
+	public ArrayList<Card> getHand() {
+		return hand;
+	}
+	
 	public void sort() {
 		Collections.sort(hand);
 	}

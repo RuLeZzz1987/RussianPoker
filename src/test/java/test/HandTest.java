@@ -1,18 +1,50 @@
 package test;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import source.Card;
+import source.CardsDraw;
+import source.GameMath;
 import source.Hand;
 import source.Suit;
 
 public class HandTest {
-
-
+	
+	private Hand hand;
+	private GameMath gameMath;
+	
+	@Before
+	public void setUp() {
+		hand = new Hand();
+		gameMath = new GameMath();
+	}
+	
+	@Test
+	public void testPermutation() {
+		hand.add(new Card(Suit.CLUBS, 'A', 14));
+		hand.add(new Card(Suit.HEART, 'K', 13));
+		hand.add(new Card(Suit.SPADES, '6', 6));
+		hand.add(new Card(Suit.DIAMOND, '3', 3));
+		hand.add(new Card(Suit.CLUBS, '2', 2));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(0), hand.getHand().get(1), hand.getHand().get(2));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(0), hand.getHand().get(1), hand.getHand().get(3));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(0), hand.getHand().get(1), hand.getHand().get(4));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(0), hand.getHand().get(2), hand.getHand().get(3));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(0), hand.getHand().get(2), hand.getHand().get(4));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(0), hand.getHand().get(3), hand.getHand().get(4));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(1), hand.getHand().get(2), hand.getHand().get(3));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(1), hand.getHand().get(2), hand.getHand().get(4));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(1), hand.getHand().get(3), hand.getHand().get(4));
+		gameMath.addPossibleChanges(hand, hand.getHand(), hand.getHand().get(2), hand.getHand().get(3), hand.getHand().get(4));
+	}
+	
 	@Test
 	public void testIsFlush() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A', 14));
 		hand.add(new Card(Suit.CLUBS, 'K', 13));
 		hand.add(new Card(Suit.CLUBS, '6', 6));
@@ -23,7 +55,6 @@ public class HandTest {
 	
 	@Test
 	public void testKickersList() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A', 14));
 		hand.add(new Card(Suit.DIAMOND, 'A', 14));
 		hand.add(new Card(Suit.CLUBS, '6', 6));
@@ -38,7 +69,6 @@ public class HandTest {
 
 	@Test
 	public void testCombinationDNQ() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'J'));
 		hand.add(new Card(Suit.CLUBS, '6'));
@@ -49,7 +79,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationAK() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'K'));
 		hand.add(new Card(Suit.CLUBS, '6'));
@@ -60,7 +89,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationPairAABCD() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'K'));
 		hand.add(new Card(Suit.DIAMOND, 'K'));
 		hand.add(new Card(Suit.CLUBS, '7'));
@@ -71,7 +99,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationPairABBCD() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'J'));
 		hand.add(new Card(Suit.CLUBS, 'J'));
@@ -82,7 +109,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationPairABCCD() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'J'));
 		hand.add(new Card(Suit.CLUBS, '6'));
@@ -93,7 +119,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationPairABCDD() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'J'));
 		hand.add(new Card(Suit.CLUBS, '6'));
@@ -104,7 +129,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationTwoPairsAABBC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'A'));
 		hand.add(new Card(Suit.CLUBS, '6'));
@@ -115,7 +139,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationTwoPairsAABCC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'A'));
 		hand.add(new Card(Suit.CLUBS, '7'));
@@ -126,7 +149,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationTwoPairsABBCC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, '7'));
 		hand.add(new Card(Suit.CLUBS, '7'));
@@ -137,7 +159,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationSetAAABC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, '7'));
 		hand.add(new Card(Suit.DIAMOND, '7'));
 		hand.add(new Card(Suit.SPADES, '7'));
@@ -148,7 +169,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationSetABBBC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'J'));
 		hand.add(new Card(Suit.CLUBS, 'J'));
@@ -159,7 +179,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationSetABCCC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'J'));
 		hand.add(new Card(Suit.DIAMOND, '2'));
@@ -170,7 +189,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationFullHouseAAACC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'A'));
 		hand.add(new Card(Suit.HEART, 'A'));
@@ -181,7 +199,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationFullHouseAACCC() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'A'));
 		hand.add(new Card(Suit.SPADES, '2'));
@@ -192,7 +209,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationFourOfaKindAAAAB() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, 'A'));
 		hand.add(new Card(Suit.HEART, 'A'));
@@ -203,7 +219,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationFourOfaKindABBBB() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, '2'));
 		hand.add(new Card(Suit.HEART, '2'));
@@ -214,7 +229,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationStraight() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'K'));
 		hand.add(new Card(Suit.DIAMOND, 'Q'));
 		hand.add(new Card(Suit.HEART, 'J'));
@@ -225,7 +239,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationWheelStraight() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.DIAMOND, '5'));
 		hand.add(new Card(Suit.HEART, '4'));
@@ -236,7 +249,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationStraightFlush() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'K'));
 		hand.add(new Card(Suit.CLUBS, 'Q'));
 		hand.add(new Card(Suit.CLUBS, 'J'));
@@ -247,7 +259,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationWheelStraightFlush() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.CLUBS, '5'));
 		hand.add(new Card(Suit.CLUBS, '4'));
@@ -258,7 +269,6 @@ public class HandTest {
 	
 	@Test
 	public void testCombinationRoyalFlush() {
-		Hand hand = new Hand();
 		hand.add(new Card(Suit.CLUBS, 'A'));
 		hand.add(new Card(Suit.CLUBS, 'K'));
 		hand.add(new Card(Suit.CLUBS, 'Q'));
