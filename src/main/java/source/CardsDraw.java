@@ -9,12 +9,14 @@ public class CardsDraw{
 	private Hand hand;
 	private ArrayList<Card> cardsForChange;
 	
-	public CardsDraw(Hand hand, ArrayList<Card> knownCards, Card... cardsForChange) {
+	public CardsDraw(Hand hand, ArrayList<Card> knownCards, ArrayList<Card> cardsForChange) {
 		this.knownCards = knownCards;
 		this.hand = hand;
-		for (int i=0; i<cardsForChange.length; i++) {
-			this.cardsForChange.add(cardsForChange[i]);
-		}
+		this.cardsForChange = cardsForChange;		
+	}
+	
+	public void addCardsForChange(Card card) {
+		this.cardsForChange.add(card);
 	}
 	
 	public ArrayList<Card> getDrawList(){
