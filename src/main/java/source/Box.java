@@ -8,7 +8,7 @@ public abstract class Box {
 	private Hand hand = new Hand();
 	private int power;
 	private int combinationHash;
-	private ArrayList<Hand> handList = new ArrayList<Hand>();
+	
 	
 	public Hand getHand() {
 		return hand;

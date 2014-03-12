@@ -98,6 +98,10 @@ public class Card implements Comparable<Card> {
             return score;
             
     }
+    
+    public Boolean isSame(Card card) {
+    	return (this.suit == card.suit && this.score == card.score) ? true : false; 
+    }
 
     @Override
     public int compareTo(Card obj) {

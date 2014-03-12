@@ -24,6 +24,18 @@ public class CardTest {
 	}
 	
 	@Test
+	public void testIsSameCard() {
+		Card card1 = new Card(Suit.CLUBS, 'A');
+		Card card2 = new Card(Suit.CLUBS, 'A');
+		assertEquals(true, card1.isSame(card2));
+		card2 = new Card(Suit.DIAMOND, 'A');
+		assertEquals(false, card1.isSame(card2));
+		card2 = new Card(Suit.CLUBS, 'K');
+		assertEquals(false, card1.isSame(card2));
+		
+	}
+	
+	@Test
 	public void testCreateCard() {
 		Card card1 = new Card(Suit.CLUBS, 'A');
 		assertEquals(14, card1.getScore());

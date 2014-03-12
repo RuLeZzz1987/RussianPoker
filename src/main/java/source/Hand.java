@@ -6,7 +6,36 @@ import java.util.Collections;
 public class Hand {
 	
 	private ArrayList<Card> hand = new ArrayList<Card>();
+	private GameType gameType;
 	
+	public Hand(GameType gameType, Card... card) throws IllegalArgumentException{
+		this.gameType = gameType;
+		for (int i=0; i<card.length; i++) {
+			hand.add(card[i]);
+		switch(this.gameType) {
+		case FiveCard : {
+			if ( hand.size() != 5 ) 
+				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 5!");
+			break;
+		}
+		case Omaha : {
+			if ( hand.size() != 4 ) 
+				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 4!");
+			break;
+		}
+		case Texas : {
+			if ( hand.size() != 2 ) 
+				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 2!");
+			break;
+		}
+		}
+		}
+	}
+	
+	public Hand() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void add(Card card) {
 		hand.add(card);
 	}

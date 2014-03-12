@@ -10,6 +10,7 @@ import org.junit.Test;
 import source.Card;
 import source.CardsDraw;
 import source.GameMath;
+import source.GameType;
 import source.Hand;
 import source.Suit;
 
@@ -23,6 +24,14 @@ public class HandTest {
 		hand = new Hand();
 		gameMath = new GameMath();
 		testGameMath = new GameMath();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testHandCreate(){
+		hand = new Hand(GameType.FiveCard, new Card(Suit.CLUBS, 'A', 14) , new Card(Suit.HEART, 'K', 13),
+				new Card(Suit.SPADES, '6', 6), new Card(Suit.DIAMOND, '3', 3) );
+		hand = new Hand(GameType.Texas, new Card(Suit.CLUBS, 'A', 14) , new Card(Suit.HEART, 'K', 13),
+				new Card(Suit.SPADES, '6', 6), new Card(Suit.DIAMOND, '3', 3) );
 	}
 	
 	@Test
