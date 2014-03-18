@@ -17,13 +17,10 @@ import source.Suit;
 public class HandTest {
 	
 	private Hand hand;
-	private GameMath gameMath, testGameMath;
 	
 	@Before
 	public void setUp() {
 		hand = new Hand();
-		gameMath = new GameMath();
-		testGameMath = new GameMath();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -40,13 +37,8 @@ public class HandTest {
 		hand.add(new Card(Suit.HEART, 'K', 13));
 		hand.add(new Card(Suit.SPADES, '6', 6));
 		hand.add(new Card(Suit.DIAMOND, '3', 3));
-		hand.add(new Card(Suit.CLUBS, '2', 2));
-		
-		testGameMath.generatePossibleChanges(hand.getHand(), 3);
-		/*for (int i=0; i< testGameMath.getPossibleChanges().size(); i++) {
-			assertEquals(true, testGameMath.getPossibleChanges().get(i).isSameSet(gameMath.getPossibleChanges().get(i)));
-		} */
-		
+		hand.add(new Card(Suit.CLUBS, '2', 2));		
+		GameMath.generateCombinations(hand.getHand(), 3);
 	}
 	
 	@Test

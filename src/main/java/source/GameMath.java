@@ -2,33 +2,24 @@ package source;
 
 import java.util.ArrayList;
 
-public class GameMath{
+	public class GameMath{
 	
-	private int f = 0;
-	private ArrayList<ArrayList<Card>> combin = new ArrayList<ArrayList<Card>>();
-	private ArrayList<CardsDraw> possibleChanges = new ArrayList<CardsDraw>();
+	private static int f = 0;
+	private static ArrayList<ArrayList<Card>> combin = new ArrayList<ArrayList<Card>>();
 	
-	public void addPossibleChanges(Hand hand, ArrayList<Card> knownCards, ArrayList<Card> cards) {
-			possibleChanges.add(new CardsDraw(hand, knownCards, cards));		
-	}
-	
-	public ArrayList<CardsDraw> getPossibleChanges() {
-		return possibleChanges;
-	}
-	
-	public ArrayList<ArrayList<Card>> generatePossibleChanges(ArrayList<Card> cardList, int k) {
+	public static ArrayList<ArrayList<Card>> generateCombinations(ArrayList<Card> cardList, int k) {
 		int g = cardList.size();
 		combinate(cardList, g, k);
 		return combin;
 	}
 
-	private void combinate(ArrayList<Card> cardList, int size, int k) {
+	private static  void combinate(ArrayList<Card> cardList, int size, int k) {
 		Card[] data = new Card[k];
 		combinationUtil(cardList, data, 0, size-1, 0, k);
 		
 	}
 
-	private void combinationUtil(ArrayList<Card> cardList,
+	private static void combinationUtil(ArrayList<Card> cardList,
 			Card[] data, int start, int end, int index, int k) {
 		 if (index == k)
 		    {		
