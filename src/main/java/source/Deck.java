@@ -17,7 +17,7 @@ public class Deck {
     public Deck() {
             
 
-                    for (Suit suit: Suit.values()){
+                    for (CardSuit suit: CardSuit.values()){
                             for (int j=2; j<15; j++) {
                                     Card card= new Card(suit,j,j);
                                     deck.add(card);

@@ -1,12 +1,12 @@
 package source;
 
-public enum Suit {
+public enum CardSuit {
 
 	 HEART('\u2665'),  CLUBS('\u2663'), DIAMOND('\u2666'), SPADES('\u2660'),;
 
 	 private char str;
 
-	 private Suit(char str) {
+	 private CardSuit(char str) {
 		 this.str = str;
 	 }
 

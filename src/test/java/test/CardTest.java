@@ -8,8 +8,9 @@ import org.junit.Test;
 
 import source.Card;
 import source.Deck;
+import source.GameType;
 import source.PlayerBox;
-import source.Suit;
+import source.CardSuit;
 import source.Table;
 
 public class CardTest {
@@ -25,36 +26,36 @@ public class CardTest {
 	
 	@Test
 	public void testIsSameCard() {
-		Card card1 = new Card(Suit.CLUBS, 'A');
-		Card card2 = new Card(Suit.CLUBS, 'A');
+		Card card1 = new Card(CardSuit.CLUBS, 'A');
+		Card card2 = new Card(CardSuit.CLUBS, 'A');
 		assertEquals(true, card1.isSame(card2));
-		card2 = new Card(Suit.DIAMOND, 'A');
+		card2 = new Card(CardSuit.DIAMOND, 'A');
 		assertEquals(false, card1.isSame(card2));
-		card2 = new Card(Suit.CLUBS, 'K');
+		card2 = new Card(CardSuit.CLUBS, 'K');
 		assertEquals(false, card1.isSame(card2));
 		
 	}
 	
 	@Test
 	public void testCreateCard() {
-		Card card1 = new Card(Suit.CLUBS, 'A');
+		Card card1 = new Card(CardSuit.CLUBS, 'A');
 		assertEquals(14, card1.getScore());
-		card1 = new Card(Suit.CLUBS, 'K');
+		card1 = new Card(CardSuit.CLUBS, 'K');
 		assertEquals(13, card1.getScore());
-		card1 = new Card(Suit.CLUBS, 'Q'); 
+		card1 = new Card(CardSuit.CLUBS, 'Q'); 
 		assertEquals(12, card1.getScore());
-		card1 = new Card(Suit.CLUBS, 'J');
+		card1 = new Card(CardSuit.CLUBS, 'J');
 		assertEquals(11, card1.getScore());
-		card1 = new Card(Suit.CLUBS, 'T');
+		card1 = new Card(CardSuit.CLUBS, 'T');
 		assertEquals(10, card1.getScore());
 		for (int i=2; i<=9; i++) {
-			card1 = new Card(Suit.CLUBS, (char)(i+48));
+			card1 = new Card(CardSuit.CLUBS, (char)(i+48));
 			assertEquals(i, card1.getScore()); 
 		}
 	}
 	@Test
 	public void testShowDeal() {
-		Table table = new Table();
+		Table table = new Table(GameType.FiveCard);
 		table.deal(2);
 		List<PlayerBox> boxList = table.getBoxes();
 		for (PlayerBox b: boxList) {

@@ -1,27 +1,23 @@
 package source;
 
-import source.Suit;
-import java.lang.Comparable;
-
-
 public class Card implements Comparable<Card> {
-    private Suit suit;
+    private CardSuit suit;
     private char rate;
     private int score;
 
-    public Card(Suit suit, int rate, int score) {
+    public Card(CardSuit suit, int rate, int score) {
     	this.score = score;
     	this.suit = suit;
     	setRate(rate);
     }
     
-    public Card(Suit suit, char rate, int score) {
+    public Card(CardSuit suit, char rate, int score) {
     	this.score = score;
     	this.suit = suit;
     	this.rate = rate;
     }
     
-    public Card(Suit suit, char rate) {
+    public Card(CardSuit suit, char rate) {
     	this.suit = suit;
     	this.rate = rate;
     	switch (rate) {
@@ -51,8 +47,8 @@ public class Card implements Comparable<Card> {
     	}
     }
     
-    public Suit getSuit(){
-            return(suit);
+    public CardSuit getSuit(){
+            return(suit);           
     }
     public char getRate(){
             return(rate);
@@ -89,6 +85,8 @@ public class Card implements Comparable<Card> {
             }
     }
 
+
+    
     @Override
     public String toString() {
       return String.valueOf(rate)+suit;

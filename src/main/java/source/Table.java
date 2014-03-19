@@ -8,12 +8,35 @@ public class Table extends Box{
 	private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
 	private Deck deck = new Deck();
 	private List<Card> cardList = deck.getDeck();
+	private GameType gameType;
+	private GameStatus gameStatus;
 	
+	public Table(GameType gameType) {
+		this.gameType = gameType;
+		gameStatus = GameStatus.bets;
+	}
+
 	public void deal(int boxCount)
 	{	
-		for (int j=0; j<boxCount; j++)
-			playerBoxes.add(new PlayerBox());
-		for (int i=0; i<5; i++)
+		if (playerBoxes.size() != 0) {
+			boxCount = playerBoxes.size();
+		}
+		int k = 5;
+		switch (gameType) {
+			case FiveCard : {
+				k = 5;
+				break;
+			}
+			case Omaha : {
+				k = 4;
+				break;
+			}
+			case Texas : {
+				k = 2;
+				break;
+			}
+		}
+		for (int i=0; i<k; i++)
 		{	
 			for (PlayerBox b: playerBoxes) 
 			{	
@@ -29,5 +52,21 @@ public class Table extends Box{
 	
 	public List<PlayerBox> getBoxes() {
 		return this.playerBoxes;
+	}
+
+	public void makeBets(int... bets) {		
+		for(int i=0; i<bets.length; i++) {
+			playerBoxes.add(new PlayerBox(bets[i]));
+		}
+		gameStatus = GameStatus.deal;
+	}
+	
+	@Override 
+	public String toString() {
+		String result = "";
+		for(int i=0; i<playerBoxes.size(); i++) {
+			result = result + " " + playerBoxes.get(i).toString();
+		}
+		return result + " | " + getHand().toString();
 	}
 }
