@@ -3,9 +3,7 @@ package source;
 public abstract class Box {
 	
 	private Hand hand = new Hand();
-	private int power;
-	private int combinationHash;
-	
+		
 	public Hand getHand() {
 		return hand;
 	}	
@@ -18,8 +16,14 @@ public abstract class Box {
 		this.hand.add(card);
 	}
 	
+
+	public int getPower() {
+		return Integer.parseInt(hand.getCombinationOnFiveCards().getCombCode());
+	}
+	
 	@Override
 	public String toString() {
 		return hand.toString();
 	}
+	
 }

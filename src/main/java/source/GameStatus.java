@@ -2,6 +2,6 @@ package source;
 
 public enum GameStatus {
 	
-	bets, deal, draws, determination, payment, ante, buyingGame; 
+	BETS, DEAL, DRAWS, DETERMINATION, PAYMENT, ANTE, BUYING_GAME; 
 	
 }

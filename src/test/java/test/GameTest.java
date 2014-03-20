@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +18,9 @@ public class GameTest {
 	}
 	
 	@Test
-	public void testDeal() {
+	public void testDeal() throws IOException {
 		table.makeBets(10, 15, 25);
-		table.deal(1);
+		table.deal();
 		System.out.println(table.toString());
 	}
 

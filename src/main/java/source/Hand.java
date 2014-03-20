@@ -10,7 +10,7 @@ public class Hand {
 	
 	public Hand(GameType gameType, Card... card) throws IllegalArgumentException{
 		this.gameType = gameType;
-		for (int i=0; i<card.length; i++) {
+		for (int i=0; i<card.length; i++) 
 			hand.add(card[i]);
 		switch(this.gameType) {
 		case FiveCard : {
@@ -28,8 +28,7 @@ public class Hand {
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 2!");
 			break;
 		}
-		}
-		}
+		}		
 	}
 	
 	public Hand() {
@@ -38,6 +37,14 @@ public class Hand {
 
 	public void add(Card card) {
 		hand.add(card);
+	}
+	
+	public void removeCardByMask(int... mask) {
+		for (int i = mask.length - 1; i >= 0; i--) {
+			if ( mask[i] == 1 ) {
+				hand.remove(i);
+			}
+		}
 	}
 	
 	public ArrayList<Card> getHand() {

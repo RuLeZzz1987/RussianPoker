@@ -1,5 +1,6 @@
 package source;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,17 @@ public class Table extends Box{
 	
 	public Table(GameType gameType) {
 		this.gameType = gameType;
-		gameStatus = GameStatus.bets;
+		gameStatus = GameStatus.BETS;
 	}
 
+	public void deal() throws IOException {
+		if (gameStatus != GameStatus.DEAL) {
+			throw new IOException("No money, no Cards!");
+		} else {
+			deal(playerBoxes.size());
+		}
+	}
+	
 	public void deal(int boxCount)
 	{	
 		if (playerBoxes.size() != 0) {
@@ -48,6 +57,7 @@ public class Table extends Box{
 			deck.setUsed(cardList.get(0));
 			cardList.remove(0);
 		}
+		gameStatus = GameStatus.DRAWS;
 	}
 	
 	public List<PlayerBox> getBoxes() {
@@ -58,7 +68,7 @@ public class Table extends Box{
 		for(int i=0; i<bets.length; i++) {
 			playerBoxes.add(new PlayerBox(bets[i]));
 		}
-		gameStatus = GameStatus.deal;
+		gameStatus = GameStatus.DEAL;
 	}
 	
 	@Override 
