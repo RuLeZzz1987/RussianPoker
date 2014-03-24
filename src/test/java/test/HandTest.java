@@ -22,17 +22,17 @@ public class HandTest {
 	
 	@Test
 	public void testRemoveCardFromHand() {
-		hand = new Hand(GameType.FiveCard, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),
+		hand = new Hand(GameType.FIVECARD, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),
 				new Card(CardSuit.SPADES, '6', 6), new Card(CardSuit.DIAMOND, '3', 3), new Card(CardSuit.DIAMOND, '2', 2) );
 		hand.removeCardByMask(1,0,1,0,1);
-		assertEquals(2, hand.getHand().size());
+		assertEquals(true, hand.compareTo(new Hand(GameType.UNKNOWN, new Card(CardSuit.DIAMOND, '3', 3), new Card(CardSuit.HEART, 'K', 13))));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testHandCreate(){
-		hand = new Hand(GameType.FiveCard, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),
+		hand = new Hand(GameType.FIVECARD, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),
 				new Card(CardSuit.SPADES, '6', 6), new Card(CardSuit.DIAMOND, '3', 3) );
-		hand = new Hand(GameType.Texas, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),
+		hand = new Hand(GameType.TEXAS, new Card(CardSuit.CLUBS, 'A', 14) , new Card(CardSuit.HEART, 'K', 13),
 				new Card(CardSuit.SPADES, '6', 6), new Card(CardSuit.DIAMOND, '3', 3) );
 	}
 	

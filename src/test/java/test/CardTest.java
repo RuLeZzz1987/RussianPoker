@@ -55,7 +55,7 @@ public class CardTest {
 	}
 	@Test
 	public void testShowDeal() {
-		Table table = new Table(GameType.FiveCard);
+		Table table = new Table(GameType.FIVECARD);
 		table.deal(2);
 		List<PlayerBox> boxList = table.getBoxes();
 		for (PlayerBox b: boxList) {

@@ -3,7 +3,7 @@ package source;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Hand {
+public class Hand{
 	
 	private ArrayList<Card> hand = new ArrayList<Card>();
 	private GameType gameType;
@@ -13,21 +13,23 @@ public class Hand {
 		for (int i=0; i<card.length; i++) 
 			hand.add(card[i]);
 		switch(this.gameType) {
-		case FiveCard : {
+		case FIVECARD : {
 			if ( hand.size() != 5 ) 
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 5!");
 			break;
 		}
-		case Omaha : {
+		case OMAHA : {
 			if ( hand.size() != 4 ) 
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 4!");
 			break;
 		}
-		case Texas : {
+		case TEXAS : {
 			if ( hand.size() != 2 ) 
 				throw new IllegalArgumentException("Illegal cards count for this type of game. Correct number is 2!");
 			break;
 		}
+		default :
+			break;
 		}		
 	}
 	
@@ -180,5 +182,16 @@ public class Hand {
 	@Override
 	public String toString() {
 		return hand.toString();
+	}
+
+	
+	public Boolean compareTo(Hand h) {
+		sort();
+		h.sort();
+		if ( hand.size() != h.getHand().size() ) return false; 
+			else 
+					for (int i=0; i < hand.size(); i++) 
+						if ( !hand.get(i).isSame(h.getHand().get(i))) return false;				
+		return true;
 	}
 }

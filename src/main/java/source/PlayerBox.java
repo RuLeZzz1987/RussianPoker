@@ -6,6 +6,7 @@ public class PlayerBox extends Box{
 	
 	private int bet;
 	private GameMath handMath = new GameMath();
+	private BoxStatus boxStatus = BoxStatus.DEALED;
 	private ArrayList<Hand> handList = new ArrayList<Hand>();
 	
 	public PlayerBox(Hand hand, int bet) {
@@ -25,8 +26,19 @@ public class PlayerBox extends Box{
 		return bet;
 	}
 	
-	 
+	public void play() {
+		boxStatus = BoxStatus.BET;
+	}
 
+	public void fold() {
+		boxStatus = BoxStatus.FOLD;
+	}
+	
+	public BoxStatus getStatus() {
+		return boxStatus;
+	}
+	
+	
 	public GameMath getMath(){
 		return handMath;
 	}

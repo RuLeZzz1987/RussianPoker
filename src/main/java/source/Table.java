@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Table extends Box{
-		
+	
+	private int bankroll = 1000;
 	private List<PlayerBox> playerBoxes = new ArrayList<PlayerBox>();
 	private Deck deck = new Deck();
 	private List<Card> cardList = deck.getDeck();
@@ -32,18 +33,20 @@ public class Table extends Box{
 		}
 		int k = 5;
 		switch (gameType) {
-			case FiveCard : {
+			case FIVECARD : {
 				k = 5;
 				break;
 			}
-			case Omaha : {
+			case OMAHA : {
 				k = 4;
 				break;
 			}
-			case Texas : {
+			case TEXAS : {
 				k = 2;
 				break;
 			}
+			default :
+				throw new IllegalStateException("Unknown game type");
 		}
 		for (int i=0; i<k; i++)
 		{	
@@ -63,7 +66,31 @@ public class Table extends Box{
 	public List<PlayerBox> getBoxes() {
 		return this.playerBoxes;
 	}
-
+	
+	public PlayerBox getBox(int i) {
+		return this.playerBoxes.get(i);
+	}
+	
+	public void calculateDealResult() {
+		for (int i=0; i < playerBoxes.size(); i++ ) {
+			if ( playerBoxes.get(i).getStatus().equals(BoxStatus.BET) )	
+				switch ( playerBoxes.get(i).getHand().getCombinationOnFiveCards().compareTo(getHand().getCombinationOnFiveCards()) ) {
+					case 1 : {
+						
+						break;
+					}
+					case 0 : {
+						
+						break;
+					}
+					case -1: {
+						
+						break;
+					}
+				}
+			}
+	}
+	
 	public void makeBets(int... bets) {		
 		for(int i=0; i<bets.length; i++) {
 			playerBoxes.add(new PlayerBox(bets[i]));
