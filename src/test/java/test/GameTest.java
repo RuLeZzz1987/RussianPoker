@@ -29,7 +29,7 @@ public class GameTest {
 			table.getBoxes().get(1).fold();
 		} 
 		else	table.getBoxes().get(1).play();
-		
+		table.calculateDealResult();
 		System.out.println(table.toString());
 	}
 

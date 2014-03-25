@@ -72,23 +72,27 @@ public class Table extends Box{
 	}
 	
 	public void calculateDealResult() {
-		for (int i=0; i < playerBoxes.size(); i++ ) {
-			if ( playerBoxes.get(i).getStatus().equals(BoxStatus.BET) )	
-				switch ( playerBoxes.get(i).getHand().getCombinationOnFiveCards().compareTo(getHand().getCombinationOnFiveCards()) ) {
-					case 1 : {
-						
-						break;
-					}
-					case 0 : {
-						
-						break;
-					}
-					case -1: {
-						
-						break;
+		if ( getHand().getCombinationOnFiveCards().getHighness() != 0 && gameStatus == GameStatus.DETERMINATION) {
+			for (int i=0; i < playerBoxes.size(); i++ ) {
+				if ( playerBoxes.get(i).getStatus().equals(BoxStatus.BET) )	
+					switch ( playerBoxes.get(i).getHand().getCombinationOnFiveCards().compareTo(getHand().getCombinationOnFiveCards()) ) {
+						case 1 : {
+							
+							break;
+						}
+						case 0 : {
+							
+							break;
+						}
+						case -1: {
+							
+							break;
+						}
 					}
 				}
-			}
+		}	else {
+			gameStatus = GameStatus.ANTE;
+		}
 	}
 	
 	public void makeBets(int... bets) {		
